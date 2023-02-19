@@ -19,7 +19,7 @@ class App extends React.Component {
                 // console.table (rates)
 
                 let {CAD, IDR, JPY, CHF, EUR, GBP} = rates
-                console.log (CAD)
+                // console.log (CAD)
                 
                 let persen1 = parseFloat(CAD) / 5;
                 let persen2 = parseFloat(IDR) / 5;
@@ -27,7 +27,7 @@ class App extends React.Component {
                 let persen4 = parseFloat(CHF) / 5;
                 let persen5 = parseFloat(EUR) / 5;
                 let persen6 = parseFloat(GBP) / 5;
-                console.log(persen1)
+                // console.log(persen1)
                 
                 let weBuyCAD = (parseFloat(CAD) + persen1)
                 let weBuyIDR = (parseFloat(IDR) + persen2)
