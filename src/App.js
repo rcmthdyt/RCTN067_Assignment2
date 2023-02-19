@@ -9,7 +9,7 @@ class App extends React.Component {
         }
       }
     componentDidMount (){
-        fetch('holdhttps://api.currencyfreaks.com/latest?apikey=85ad4dbd1ca245e0bf1c06440d1cfc6b&symbols=CAD,IDR,JPY,CHF,EUR,USD,GBP')
+        fetch('https://api.currencyfreaks.com/latest?apikey=85ad4dbd1ca245e0bf1c06440d1cfc6b&symbols=CAD,IDR,JPY,CHF,EUR,USD,GBP')
         .then((response) => response.json())
         .then((result) => {            
                 this.setState ({post: result})                
