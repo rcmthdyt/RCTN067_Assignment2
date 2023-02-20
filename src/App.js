@@ -1,19 +1,21 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import './App.css';
-import DataTable from 'react-data-table-component';
 
 class App extends React.Component {
     constructor (dataCurrencyfreaks){
         super (dataCurrencyfreaks)
         this.state = {
             post: [],
+            weBuy:[],
+            weSell: [],
         }
       }
     componentDidMount (){
         fetch('https://api.currencyfreaks.com/latest?apikey=cfcb55b0a9b04fa7bc9fa7ebf8906b01&symbols=CAD,IDR,JPY,CHF,EUR,USD,GBP')
         .then((response) => response.json())
         .then((result) => {            
-                this.setState ({post: result})                
+                this.setState ({post: result.rates})
+                console.log(result.rates)                
                 
                 let {date, base, rates} = result  
                 // console.table (rates)
@@ -33,82 +35,90 @@ class App extends React.Component {
                 let weBuyIDR = (parseFloat(IDR) + persen2)
                 let weBuyJPY = (parseFloat(JPY) + persen3)
                 let weBuyCHF = (parseFloat(CHF) + persen4)
-                let weBuyEUR = (parseFloat(CAD) + persen5)
-                let weBuyGBP = (parseFloat(CAD) + persen6)
+                let weBuyEUR = (parseFloat(EUR) + persen5)
+                let weBuyGBP = (parseFloat(GBP) + persen6)
                 // console.log (weBuyIDR)
 
                 let weSellCAD = (parseFloat(CAD) - persen1)
                 let weSellIDR = (parseFloat(IDR) - persen2)
                 let weSellJPY = (parseFloat(JPY) - persen3)
                 let weSellCHF = (parseFloat(CHF) - persen4)
-                let weSellEUR = (parseFloat(CAD) - persen5)
-                let weSellGBP = (parseFloat(CAD) - persen6)
+                let weSellEUR = (parseFloat(EUR) - persen5)
+                let weSellGBP = (parseFloat(GBP) - persen6)
                 // console.log (weSellIDR)
-                              
-                document.getElementById('date').textContent = date;
-                document.getElementById('base').textContent = base;
-                document.getElementById('CAD').textContent = CAD;
-                document.getElementById('IDR').textContent = IDR;
-                document.getElementById('JPY').textContent = JPY;
-                document.getElementById('CHF').textContent = CHF;
-                document.getElementById('EUR').textContent = EUR;
-                document.getElementById('GBP').textContent = GBP;
 
-                document.getElementById('weBuyCAD').textContent = weBuyCAD;
-                document.getElementById('weBuyIDR').textContent = weBuyIDR;
-                document.getElementById('weBuyJPY').textContent = weBuyJPY;
-                document.getElementById('weBuyCHF').textContent = weBuyCHF;
-                document.getElementById('weBuyEUR').textContent = weBuyEUR;
-                document.getElementById('weBuyGBP').textContent = weBuyGBP;
+                this.setState({weBuy:{
+                  CAD: weBuyCAD,
+                  IDR: weBuyIDR,
+                  JPY: weBuyJPY,
+                  CHF: weBuyCHF,
+                  EUR: weBuyEUR,
+                  GBP: weBuyGBP,
+                }})
 
-                document.getElementById('weSellCAD').textContent = weSellCAD;
-                document.getElementById('weSellIDR').textContent = weSellIDR;
-                document.getElementById('weSellJPY').textContent = weSellJPY;
-                document.getElementById('weSellCHF').textContent = weSellCHF;
-                document.getElementById('weSellEUR').textContent = weSellEUR;
-                document.getElementById('weSellGBP').textContent = weSellGBP;
+                this.setState({weSell:{
+                  CAD: weSellCAD,
+                  IDR: weSellIDR,
+                  JPY: weSellJPY,
+                  CHF: weSellCHF,
+                  EUR: weSellEUR,
+                  GBP: weSellGBP,
+                }})
                 // document.getElementById('rates.USD').textContent = rates.USD;
-
         })
-      
     }
     render() {
       return (
-        
-        <div>
-          
-          <h1>Display Rate Currency</h1>
-          <p>Tanggal: <span id="date"></span></p>
-          <p>Nilai Tukar: <span id="base"></span></p>
-          <h2>Harga Penukaran Hari Ini</h2>
-            <ul>
-            <p>CAD: <span id="CAD"></span></p>
-            <p>EUR: <span id="EUR"></span></p>
-            <p>IDR: <span id="IDR"></span></p>
-            <p>JPY: <span id="JPY"></span></p>
-            <p>CHF: <span id="CHF"></span></p>
-            <p>GBP: <span id="GBP"></span></p>
-            </ul>
-            <h2>Kami Membeli</h2>
-            <ul>
-            <p>CAD: <span id="weBuyCAD"></span></p>
-            <p>EUR: <span id="weBuyEUR"></span></p>
-            <p>IDR: <span id="weBuyIDR"></span></p>
-            <p>JPY: <span id="weBuyJPY"></span></p>
-            <p>CHF: <span id="weBuyCHF"></span></p>
-            <p>GBP: <span id="weBuyGBP"></span></p>
-            </ul>
-            <h2>Kami Menjual</h2>
-            <ul>
-            <p>CAD: <span id="weSellCAD"></span></p>
-            <p>EUR: <span id="weSellEUR"></span></p>
-            <p>IDR: <span id="weSellIDR"></span></p>
-            <p>JPY: <span id="weSellJPY"></span></p>
-            <p>CHF: <span id="weSellCHF"></span></p>
-            <p>GBP: <span id="weSellGBP"></span></p>
-            </ul>
+        <div class="center">
+          <table>
+            <tr>
+              <th>Currency</th>
+              <th>We Buy</th>
+              <th>Exchange Rate</th>
+              <th>We Sell</th>
+            </tr>
+            <tr>
+              <td>
+                <p>CAD:</p>
+                <p>EUR:</p>
+                <p>IDR:</p>
+                <p>JPY:</p>
+                <p>CHF:</p>
+                <p>GBP:</p>
+              </td>
+              <td>
+                <p><span id="weBuyCAD">{this.state.weBuy.CAD}</span></p>
+                <p><span id="weBuyEUR">{this.state.weBuy.EUR}</span></p>
+                <p><span id="weBuyIDR">{this.state.weBuy.IDR}</span></p>
+                <p><span id="weBuyJPY">{this.state.weBuy.CAD}</span></p>
+                <p><span id="weBuyCHF">{this.state.weBuy.CAD}</span></p>
+                <p><span id="weBuyGBP">{this.state.weBuy.CAD}</span></p>
+              </td>
+              <td>
+                <p><span id="CAD">{this.state.post.CAD}</span></p>
+                <p><span id="EUR">{this.state.post.EUR}</span></p>
+                <p><span id="IDR">{this.state.post.IDR}</span></p>
+                <p><span id="JPY">{this.state.post.JPY}</span></p>
+                <p> <span id="CHF">{this.state.post.CHF}</span></p>
+                <p> <span id="GBP">{this.state.post.GBP}</span></p>
+              </td>
+              <td>
+                <p><span id="weSellCAD">{this.state.weSell.CAD}</span></p>
+                <p><span id="weSellEUR">{this.state.weSell.EUR}</span></p>
+                <p><span id="weSellIDR">{this.state.weSell.IDR}</span></p>
+                <p><span id="weSellJPY">{this.state.weSell.JPY}</span></p>
+                <p><span id="weSellCHF">{this.state.weSell.CHF}</span></p>
+                <p><span id="weSellGBP">{this.state.weSell.GBP}</span></p>
+              </td>
+              </tr>          
+          </table>
+          <p>
+            <h3>Rates are based from 1 USD.</h3>
+            This application uses API from https://currencyfreaks.com.
+          </p>
         </div>
       )
     }
   }
 export default App;
+
