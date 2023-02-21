@@ -90,9 +90,9 @@ class App extends React.Component {
                 <p><span id="weBuyCAD">{this.state.weBuy.CAD}</span></p>
                 <p><span id="weBuyEUR">{this.state.weBuy.EUR}</span></p>
                 <p><span id="weBuyIDR">{this.state.weBuy.IDR}</span></p>
-                <p><span id="weBuyJPY">{this.state.weBuy.CAD}</span></p>
-                <p><span id="weBuyCHF">{this.state.weBuy.CAD}</span></p>
-                <p><span id="weBuyGBP">{this.state.weBuy.CAD}</span></p>
+                <p><span id="weBuyJPY">{this.state.weBuy.JPY}</span></p>
+                <p><span id="weBuyCHF">{this.state.weBuy.CHF}</span></p>
+                <p><span id="weBuyGBP">{this.state.weBuy.GBP}</span></p>
               </td>
               <td>
                 <p><span id="CAD">{this.state.post.CAD}</span></p>
